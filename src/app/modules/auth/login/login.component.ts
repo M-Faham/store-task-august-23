@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -14,7 +16,7 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [RouterLink, NgIf, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule, MatProgressSpinnerModule],
+  imports: [RouterLink, NgIf, FormsModule, MatSnackBarModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCheckboxModule, MatProgressSpinnerModule],
 
 })
 export class LoginComponent implements OnInit {
@@ -27,7 +29,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private _formBuilder: UntypedFormBuilder,
     private _router: Router,
+    private _snackBar: MatSnackBar,
+    protected t: Title
   ) {
+    t.setTitle('Login');
   }
 
   ngOnInit(): void {
@@ -40,16 +45,27 @@ export class LoginComponent implements OnInit {
 
 
   signIn(): void {
-
     if (this.loginForm.valid) {
       const u = this.loginForm.value.username;
       const p = this.loginForm.value.password;
-      if (u === 'admin' && p === 'admin') {
-        this._router.navigate(['dashboard']);
-      } else if (u === 'user' && p === 'user') {
-        this._router.navigate(['store']);
-      }
+      this._checkCredentials(u, p);
     }
+  }
+
+  private _checkCredentials(u: string, p: string) {
+    if (u === 'admin' && p === 'admin') {
+      this._router.navigate(['dashboard']);
+    } else if (u === 'user' && p === 'user') {
+      this._router.navigate(['store']);
+    } else {
+      this._showError();
+    }
+  }
+
+  private _showError() {
+    this._snackBar.open('Invalid username or password', 'OK', {
+      duration: 2000,
+    });
   }
 
 }
