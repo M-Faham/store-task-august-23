@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
@@ -22,10 +22,16 @@ import { ProductCardComponent } from 'src/app/core/components/product-card/produ
 })
 export class StoreComponent implements OnInit {
 
-  products: Product[];
+  products: Product[] = [];
   filteredProducts: Product[];
+  presentedProducts: Product[] = [];
+
   categories: string[] = [];
   search: string;
+  pageSize = 5;
+  currentPage = 0;
+
+  isLoading: boolean;
 
   constructor(
     protected _t: Title,
@@ -58,11 +64,16 @@ export class StoreComponent implements OnInit {
   }
 
   public searchProducts() {
-    if (!this.search || !this.search.trim()) { this.filteredProducts = this.products; return; }
+    if (!this.search || !this.search.trim()) {
+      this.filteredProducts = this.products;
+      this.onPageChange();
+      return;
+    }
 
     this.filteredProducts = this.products.filter((product) => {
       return product.title.toLowerCase().includes(this.search.toLowerCase());
     });
+    this.onPageChange();
   }
 
 
@@ -80,12 +91,15 @@ export class StoreComponent implements OnInit {
 
 
   private _getProducts(products: Observable<Product[]>): void {
+    this.isLoading = true;
     products.subscribe(
       (data) => {
         this.products = data;
+        this.isLoading = false;
         this.searchProducts();
       },
       () => {
+        this.isLoading = false;
         this._snackBar.open('Something went wrong', 'Close', { duration: 3000 });
       }
     );
@@ -94,5 +108,12 @@ export class StoreComponent implements OnInit {
 
 
 
+  onPageChange(event?: PageEvent) {
+    if (event) {
+      this.pageSize = event.pageSize;
+      this.currentPage = event.pageIndex;
+    }
+    this.presentedProducts = this.filteredProducts.slice(this.currentPage * this.pageSize, (this.currentPage * this.pageSize) + this.pageSize);
+  }
 
 }

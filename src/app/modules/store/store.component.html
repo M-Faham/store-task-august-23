@@ -1,6 +1,6 @@
-<div class="flex justify-end mb-4">
+<div class=" justify-end mb-4 flex flex-col sm:flex-row justify-end gap-8 mt-8 p-8 lg:p-16 sm:mt-10">
   <!-- SECTION CATEGORIES -->
-  <mat-form-field appearance="fill">
+  <mat-form-field  class="w-[300px]">
     <mat-label>Category:</mat-label>
     <mat-select (selectionChange)="getProductsByCategory($event.value)">
       <mat-option [value]="null">All</mat-option>
@@ -10,7 +10,7 @@
   <!-- !SECTION CATEGORIES -->
 
   <!-- SECTION SEARCH -->
-  <mat-form-field appearance="fill">
+  <mat-form-field  class="w-[300px]">
     <mat-label>Search</mat-label>
     <input matInput type="text" [(ngModel)]="search" placeholder="What are you looking for"
       class="border rounded-md px-2 py-1 ml-4" (keyup)="searchProducts()">
@@ -19,6 +19,11 @@
 
   <!-- SECTION PAGINATION -->
 
+  <div class="flex justify-center mt-4">
+    <mat-paginator [length]="products.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="currentPage"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
 
   <!-- !SECTION PAGINATION -->
 
@@ -28,10 +33,24 @@
 
 
 <div class="grid grid-cols-1 sm:grid-cols-3  lg:grid-cols-4 gap-8 mt-8 p-8 lg:p-16 sm:mt-10">
-  <ng-container *ngFor="let product of filteredProducts">
+  <ng-container *ngFor="let product of presentedProducts">
     <app-product-card [product]="product"></app-product-card>
   </ng-container>
+</div>
+
+
+<ng-container *ngIf="isLoading === false && (products.length === 0 || presentedProducts.length === 0)">
+  <div class="flex justify-center w-full">
+    <p class="py-8 mat-elevation-z13 w-[300px] text-center rounded-lg bg-red-500 text-white">
+      No products found
+    </p>
+  </div>
+</ng-container>
 
 
 
+<div class="flex justify-center mt-4">
+  <mat-paginator [length]="products.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+    (page)="onPageChange($event)" [pageIndex]="currentPage">
+  </mat-paginator>
 </div>
