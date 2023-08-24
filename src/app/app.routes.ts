@@ -9,13 +9,21 @@ export const appRoutes: Route[] = [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', canActivate: [UnauthGuard], loadComponent: () => import('./modules/auth/login/login.component').then(m => m.LoginComponent) },
 
+
       {
-        path: 'store', canActivate: [AuthGuard],
-        data: { role: 'user' }, loadComponent: () => import('./modules/store/store.component').then(m => m.StoreComponent)
-      },
-      {
-        path: 'dashboard', canActivate: [AuthGuard],
-        data: { role: 'admin' }, loadComponent: () => import('./modules/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent)
+        path: '',
+        canActivate: [AuthGuard],
+        loadComponent: () => import('./layout/layout.component').then(m => m.LayoutComponent),
+        children: [
+          {
+            path: 'store', canActivate: [AuthGuard],
+            data: { role: 'user' }, loadComponent: () => import('./modules/store/store.component').then(m => m.StoreComponent)
+          },
+          {
+            path: 'dashboard', canActivate: [AuthGuard],
+            data: { role: 'admin' }, loadComponent: () => import('./modules/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent)
+          }
+        ]
       }
     ]
   }

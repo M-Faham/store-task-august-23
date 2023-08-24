@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/login']);
       return false;
     }
-    return this._checkRole(user, next);
+    return next.data['role'] ? this._checkRole(user, next) : true;
   }
 
   private _checkRole(user: string, next: ActivatedRouteSnapshot): boolean {
