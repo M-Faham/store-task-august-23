@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormsModule, NgForm, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,46 +19,37 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  @ViewChild('signInNgForm') signInNgForm: NgForm;
 
 
-  signInForm: UntypedFormGroup;
-  showAlert: boolean = false;
+  loginForm: UntypedFormGroup;
 
-  /**
-   * Constructor
-   */
+
   constructor(
     private _formBuilder: UntypedFormBuilder,
     private _router: Router,
   ) {
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
-
-  /**
-   * On init
-   */
   ngOnInit(): void {
-    // Create the form
-    this.signInForm = this._formBuilder.group({
-      email: ['hughes.brian@company.com', [Validators.required, Validators.email]],
-      password: ['admin', Validators.required],
+    this.loginForm = this._formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', Validators.required],
       rememberMe: [''],
     });
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
 
-  /**
-   * Sign in
-   */
   signIn(): void {
 
+    if (this.loginForm.valid) {
+      const u = this.loginForm.value.username;
+      const p = this.loginForm.value.password;
+      if (u === 'admin' && p === 'admin') {
+        this._router.navigate(['dashboard']);
+      } else if (u === 'user' && p === 'user') {
+        this._router.navigate(['store']);
+      }
+    }
   }
 
 }
