@@ -27,8 +27,8 @@
           <button mat-icon-button type="button"
             (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
             matSuffix>
-            <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'password'">remove_red_eye</mat-icon>
-            <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'text'">remove_red_eye</mat-icon>
+            <mat-icon  *ngIf="passwordField.type === 'password'">visibility</mat-icon>
+            <mat-icon  *ngIf="passwordField.type === 'text'">visibility_off</mat-icon>
           </button>
           <mat-error>
             Password is required
