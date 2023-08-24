@@ -37,9 +37,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', Validators.required],
-      rememberMe: [''],
+      username: ['admin', [Validators.required]],
+      password: ['admin', Validators.required],
     });
   }
 
@@ -55,8 +54,10 @@ export class LoginComponent implements OnInit {
   private _checkCredentials(u: string, p: string) {
     if (u === 'admin' && p === 'admin') {
       this._router.navigate(['dashboard']);
+      this._storeUser(u);
     } else if (u === 'user' && p === 'user') {
       this._router.navigate(['store']);
+      this._storeUser(u);
     } else {
       this._showError();
     }
@@ -66,6 +67,10 @@ export class LoginComponent implements OnInit {
     this._snackBar.open('Invalid username or password', 'OK', {
       duration: 2000,
     });
+  }
+
+  private _storeUser(u: string) {
+    localStorage.setItem('stcUser', u);
   }
 
 }
