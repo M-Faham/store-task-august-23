@@ -1,17 +1,16 @@
 <div class="flex flex-col flex-auto w-full min-w-0">
 
-  <div
-    class="relative flex flex-0 items-center w-full h-16 px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden">
-    <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
+  <div class="relative flex flex-0 items-center justify-end  w-full h-16 px-4 md:px-6 z-49 shadow ">
 
-      <button mat-button (click)="logout()">
-        Logout
-        <mat-icon>logout</mat-icon>
-      </button>
+    <button mat-button (click)="logout()">
+      Logout
+      <mat-icon>logout</mat-icon>
+    </button>
 
-    </div>
   </div>
 
   <div class="flex flex-col flex-auto">
     <router-outlet *ngIf="true"></router-outlet>
   </div>
+
+</div>

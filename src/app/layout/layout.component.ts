@@ -21,7 +21,7 @@ export class LayoutComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('stc-user');
+    localStorage.removeItem('stcUser');
     this.router.navigate(['/login']);
   }
 }
