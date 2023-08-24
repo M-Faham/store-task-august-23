@@ -6,13 +6,14 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { Product, ProductsService } from 'src/@api';
+import { ProductCardComponent } from 'src/app/core/components/product-card/product-card.component';
 
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.scss'],
   standalone: true,
-  imports: [MatSnackBarModule, NgIf, MatButtonModule, MatIconModule, NgForOf]
+  imports: [MatSnackBarModule, NgIf, MatButtonModule, MatIconModule, NgForOf, ProductCardComponent]
 })
 export class StoreComponent implements OnInit {
 

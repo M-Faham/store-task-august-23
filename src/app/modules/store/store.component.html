@@ -1,35 +1,5 @@
-<div class="grid grid-cols-1 sm:grid-cols-3  lg:grid-cols-4 gap-8 mt-8  p-16 sm:mt-10">
+<div class="grid grid-cols-1 sm:grid-cols-3  lg:grid-cols-4 gap-8 mt-8 p-8 lg:p-16 sm:mt-10">
   <ng-container *ngFor="let product of filteredProducts">
-    <div class="flex flex-col shadow rounded-2xl overflow-hidden bg-card">
-      <div class="flex flex-col p-6">
-
-
-
-        <div class="flex items-center justify-between">
-          <div class="py-0.5 px-3 rounded-full text-sm font-semibold  bg-blue-100 text-blue-800 bg-blue-100">
-            {{product.category}}
-          </div>
-        </div>
-
-
-        <img class="object-cover object-center w-full h-48 mt-6 rounded-xl" src="{{product.image}}" alt="avatar">
-
-
-        <div class="mt-4 text-lg font-medium">{{product.title}}</div>
-        <div class="mt-0.5  text-secondary">{{product.description}}</div>
-        <div class="w-12 h-1 my-6 border-t-2"></div>
-
-
-        <div class="flex items-center leading-5 text-md text-secondary">
-          <mat-icon class="icon-size-5 text-hint">attach_money</mat-icon>
-          <div class="ml-1.5">{{product.price}} $</div>
-        </div>
-
-
-
-      </div>
-    </div>
-
-
+    <app-product-card [product]="product"></app-product-card>
   </ng-container>
 </div>
