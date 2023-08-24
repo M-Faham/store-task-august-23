@@ -1,5 +1,37 @@
+<div class="flex justify-end mb-4">
+  <!-- SECTION CATEGORIES -->
+  <mat-form-field appearance="fill">
+    <mat-label>Category:</mat-label>
+    <mat-select (selectionChange)="getProductsByCategory($event.value)">
+      <mat-option [value]="null">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- !SECTION CATEGORIES -->
+
+  <!-- SECTION SEARCH -->
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput type="text" [(ngModel)]="search" placeholder="What are you looking for"
+      class="border rounded-md px-2 py-1 ml-4" (keyup)="searchProducts()">
+  </mat-form-field>
+  <!-- !SECTION SEARCH -->
+
+  <!-- SECTION PAGINATION -->
+
+
+  <!-- !SECTION PAGINATION -->
+
+</div>
+
+
+
+
 <div class="grid grid-cols-1 sm:grid-cols-3  lg:grid-cols-4 gap-8 mt-8 p-8 lg:p-16 sm:mt-10">
   <ng-container *ngFor="let product of filteredProducts">
     <app-product-card [product]="product"></app-product-card>
   </ng-container>
+
+
+
 </div>
