@@ -1,30 +1,49 @@
-<!-- FILEPATH: d:\New folder (2)\stc-task-august-23\src\app\modules\admin-dashboard\product-form\product-form.component.html -->
+<mat-dialog-content class="p-0">
 
-<!-- Dialog for product form -->
-<mat-dialog-content class="p-6">
-  <form class="grid grid-cols-2 gap-6">
-    <mat-form-field class="col-span-2">
+  <h1 class="text-2xl p-4 text-white font-medium bg-blue-600 ">{{product? 'Update Product' : 'Add Product'}}</h1>
+
+
+  <form [formGroup]="productForm" class="p-6">
+
+    <mat-form-field class="w-full">
       <mat-label>Title</mat-label>
       <input matInput placeholder="Enter product title" [formControlName]="'title'">
+      <mat-error>
+        Title is required
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="col-span-2">
-      <mat-label>Description</mat-label>
-      <textarea matInput placeholder="Enter product description" [formControlName]="'description'"></textarea>
-    </mat-form-field>
-    <mat-form-field class="col-span-2">
-      <mat-label>Price</mat-label>
-      <input matInput placeholder="Enter product price" [formControlName]="'price'">
-    </mat-form-field>
 
-    <mat-form-field class="col-span-2">
+    <mat-form-field class="w-full">
       <mat-label>Category</mat-label>
       <input matInput placeholder="Enter product category" [formControlName]="'category'">
+      <mat-error>
+        Category is required
+      </mat-error>
     </mat-form-field>
 
+
+    <mat-form-field class="w-full">
+      <mat-label>Price</mat-label>
+      <input matInput placeholder="Enter product price" [formControlName]="'price'">
+      <mat-error>
+        Price is required
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field class="w-full">
+      <mat-label>Description</mat-label>
+      <textarea rows="4" matInput placeholder="Enter product description" [formControlName]="'description'"></textarea>
+      <mat-error>
+        Description is required
+      </mat-error>
+    </mat-form-field>
   </form>
+
+
 </mat-dialog-content>
-<mat-dialog-actions class="justify-end space-x-2">
+<mat-dialog-actions class="justify-end space-x-2 p-6">
   <button mat-button (click)="matDialogRef.close()">Cancel</button>
   <button mat-raised-button color="primary" (click)="onSave()">Save</button>
 </mat-dialog-actions>

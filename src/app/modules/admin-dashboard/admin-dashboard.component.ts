@@ -41,7 +41,6 @@ export class AdminDashboardComponent implements OnInit {
 
     this._productsService.getProducts().subscribe(
       (products) => {
-        console.log('got');
         this.products = products;
       },
       (error) => {
@@ -74,6 +73,8 @@ export class AdminDashboardComponent implements OnInit {
       data: product,
       width: '500px',
     }).afterClosed().subscribe((product) => {
+      console.log('product', product);
+
       if (product) {
         this.updateProducts(product, fnType);
       }
@@ -82,9 +83,9 @@ export class AdminDashboardComponent implements OnInit {
 
   updateProducts(product: Product, fnType: string): void {
     if (fnType === 'edit') {
-        this.products = this.products.map(p => p.id === product.id ? product : p);
+      this.products = this.products.map(p => p.id === product.id ? product : p);
     } else {
-        this.products.push(product);
+      this.products = [product, ...this.products];
     }
   }
 }

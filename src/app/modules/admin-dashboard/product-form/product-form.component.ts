@@ -29,17 +29,17 @@ export class ProductFormComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public matDialogRef: MatDialogRef<ProductFormComponent>,
     @Inject(MAT_DIALOG_DATA)
-    private _data: any,
+    private _data: Product,
   ) {
-    this.product = _data?.product;
+    this.product = _data;
   }
 
   ngOnInit() {
     this.productForm = this._formBuilder.group({
-      title: [, [Validators.required]],
-      category: [, Validators.required],
-      price: [, Validators.required],
-      description: [, Validators.required],
+      title: ['', [Validators.required]],
+      category: ['', Validators.required],
+      price: ['', Validators.required],
+      description: ['', Validators.required],
     });
     if (this.product) {
       this.productForm.reset(this.product);
@@ -73,9 +73,10 @@ export class ProductFormComponent implements OnInit {
 
   onSave() {
     if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
       return;
     }
-    if (this.product.id) {
+    if (this.product) {
       this.excuteApi(this.editProduct());
     } else {
       this.excuteApi(this.createProduct());
