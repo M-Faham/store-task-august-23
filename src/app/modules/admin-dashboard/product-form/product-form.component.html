@@ -1,0 +1,30 @@
+<!-- FILEPATH: d:\New folder (2)\stc-task-august-23\src\app\modules\admin-dashboard\product-form\product-form.component.html -->
+
+<!-- Dialog for product form -->
+<mat-dialog-content class="p-6">
+  <form class="grid grid-cols-2 gap-6">
+    <mat-form-field class="col-span-2">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Enter product title" [formControlName]="'title'">
+    </mat-form-field>
+
+    <mat-form-field class="col-span-2">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Enter product description" [formControlName]="'description'"></textarea>
+    </mat-form-field>
+    <mat-form-field class="col-span-2">
+      <mat-label>Price</mat-label>
+      <input matInput placeholder="Enter product price" [formControlName]="'price'">
+    </mat-form-field>
+
+    <mat-form-field class="col-span-2">
+      <mat-label>Category</mat-label>
+      <input matInput placeholder="Enter product category" [formControlName]="'category'">
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions class="justify-end space-x-2">
+  <button mat-button (click)="matDialogRef.close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions>

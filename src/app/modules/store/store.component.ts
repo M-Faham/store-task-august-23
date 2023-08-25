@@ -84,7 +84,7 @@ export class StoreComponent implements OnInit {
         this.categories = data;
       },
       () => {
-        this._snackBar.open('Something went wrong', 'Close', { duration: 3000 });
+        this._snackBar.open('Error while loading categories', 'Close', { duration: 3000 });
       }
     );
   }
@@ -100,7 +100,7 @@ export class StoreComponent implements OnInit {
       },
       () => {
         this.isLoading = false;
-        this._snackBar.open('Something went wrong', 'Close', { duration: 3000 });
+        this._snackBar.open('Error while loading products', 'Close', { duration: 3000 });
       }
     );
   }
