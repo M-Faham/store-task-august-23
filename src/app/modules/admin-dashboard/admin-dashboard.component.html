@@ -1,6 +1,10 @@
 <div class="flex justify-between items-center bg-white p-8">
-  <h1 class="text-2xl font-extrabold">Products</h1>
-  <button mat-raised-button color="primary" (click)="openModal()">Add Product</button>
+  <h1 class="
+  text-2xl md:text-5xl font-semibold tracking-tight">Dashboard</h1>
+  <button mat-raised-button color="primary" (click)="openModal()">
+    Add Product
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
 
 <div class="p-4 lg:p-8">
@@ -15,8 +19,20 @@
       <th mat-header-cell *matHeaderCellDef>{{column | uppercase}}</th>
       <td mat-cell *matCellDef="let product">
 
-        <ng-container *ngIf="column !== 'actions'"> {{product[column]}}</ng-container>
+        <ng-container *ngIf="column !== 'actions' && column !== 'image'"> {{product[column]}}</ng-container>
 
+        <ng-container *ngIf="column === 'image'">
+          <div class="flex items-center">
+            <div class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded overflow-hidden border">
+              <img class="w-8" *ngIf="product.image" [alt]="'Product thumbnail image'" [src]="product.image">
+              <div
+                class="flex items-center justify-center w-full h-full text-xs font-semibold leading-none text-center uppercase"
+                *ngIf="!product.image">
+                NO THUMB
+              </div>
+            </div>
+          </div>
+        </ng-container>
 
         <ng-container *ngIf="column == 'actions'">
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

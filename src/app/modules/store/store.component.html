@@ -1,6 +1,13 @@
-<div class="mb-4 flex flex-col items-center lg:flex-row justify-center lg:justify-end gap-8 mt-8 p-2 lg:p-16 sm:mt-10">
+<div class="flex justify-between items-center bg-white p-8">
+  <h1 class="
+  text-2xl md:text-5xl font-semibold tracking-tight">Store</h1>
+</div>
+
+
+<div
+  class="mb-4 flex flex-col items-center lg:flex-row justify-center lg:justify-end gap-8 p-2 lg:p-16 lg:pt-0  bg-white">
   <!-- SECTION CATEGORIES -->
-  <mat-form-field  class="w-[300px]">
+  <mat-form-field class="w-[300px]">
     <mat-label>Category:</mat-label>
     <mat-select (selectionChange)="getProductsByCategory($event.value)">
       <mat-option [value]="null">All</mat-option>
@@ -10,7 +17,7 @@
   <!-- !SECTION CATEGORIES -->
 
   <!-- SECTION SEARCH -->
-  <mat-form-field  class="w-[300px]">
+  <mat-form-field class="w-[300px]">
     <mat-label>Search</mat-label>
     <input matInput type="text" [(ngModel)]="search" placeholder="What are you looking for"
       class="border rounded-md px-2 py-1 ml-4" (keyup)="searchProducts()">
@@ -20,8 +27,8 @@
   <!-- SECTION PAGINATION -->
 
   <div class="flex justify-center mt-4">
-    <mat-paginator [length]="products.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="currentPage"
-      (page)="onPageChange($event)">
+    <mat-paginator [length]="products.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+      [pageIndex]="currentPage" (page)="onPageChange($event)">
     </mat-paginator>
   </div>
 
@@ -49,7 +56,7 @@
 
 
 
-<div class="flex justify-center mt-4">
+<div class="flex justify-center mt-4 w-screen bg-white">
   <mat-paginator [length]="products.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
     (page)="onPageChange($event)" [pageIndex]="currentPage">
   </mat-paginator>

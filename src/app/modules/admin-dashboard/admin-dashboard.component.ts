@@ -21,7 +21,7 @@ export class AdminDashboardComponent implements OnInit {
   products: Product[] = [];
 
   tempProduct: Product | undefined;
-  displayedColumns: string[] = ['title', 'category', 'price', 'description', 'actions'];
+  displayedColumns: string[] = ['image', 'title', 'category', 'price', 'description', 'actions'];
 
   constructor(
     protected _t: Title,
